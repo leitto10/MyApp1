@@ -9,8 +9,8 @@
 
     <EditText
         android:id="@+id/editText"
-        android:layout_width="219dp"
-        android:layout_height="66dp"
+        android:layout_width="200dp"
+        android:layout_height="64dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
@@ -40,7 +40,8 @@
         android:layout_height="53dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Button"
+        android:text="Button b"
+        android:onClick="displayToastMsgA"
         app:layout_constraintBaseline_toBaselineOf="@+id/button11"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -53,7 +54,8 @@
         android:layout_marginTop="160dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="Button"
+        android:text="Button b"
+        android:onClick="displayToastMsgB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.813"
         app:layout_constraintStart_toEndOf="@+id/button10"
@@ -65,7 +67,8 @@
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:text="Button"
+        android:text="Button c"
+        android:onClick="displayToastMsgC"
         app:layout_constraintBaseline_toBaselineOf="@+id/button14"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -78,7 +81,8 @@
         android:layout_marginTop="72dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="Button"
+        android:text="Button d"
+        android:onClick="displayToastMsgD"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.82"
         app:layout_constraintStart_toEndOf="@+id/button13"
