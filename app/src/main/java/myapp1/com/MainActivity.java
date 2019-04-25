@@ -4,7 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -15,13 +19,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     /* Toast Method*/
     public void toastMsg(String msg){
         // creating messages for ech button
-        Toast a = Toast.makeText(this, msg, Toast.LENGTH_LONG);
-        a.show();
         Toast b = Toast.makeText(this, msg, Toast.LENGTH_LONG);
         b.show();
         Toast c = Toast.makeText(this, msg, Toast.LENGTH_LONG);
@@ -31,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /* Method that call buttons messages*/
-    public void displayToastMsgA(View view){
-        toastMsg("Hi, this is Jose");
-    }
     public void displayToastMsgB(View view){
         toastMsg("Do you want to play a game?");
     }
@@ -51,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    public void displayMovies(View view) {
+
+        Intent intent = new Intent(this, DisplayMoviesActivity.class);
         startActivity(intent);
     }
 }
