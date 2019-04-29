@@ -30,7 +30,9 @@ public class listOfMovies extends ArrayAdapter<String[]> {
         //String singleItems = getItem(position);
         TextView movieTitle = (TextView) customView.findViewById(R.id.movieTitle);
         movieTitle.setText(movies[position][0]);
-        TextView josesText = (TextView) customView.findViewById(R.id.movieTitle);
+        TextView movieYear = (TextView) customView.findViewById(R.id.movieYear);
+        movieYear.setText(movies[position][1]);
+        //TextView josesText = (TextView) customView.findViewById(R.id.movieTitle);
         //ImageView josesImage = (ImageView) customView.findViewById(R.id.josesImageView);
 
         //josesText.setText(singleItems);
