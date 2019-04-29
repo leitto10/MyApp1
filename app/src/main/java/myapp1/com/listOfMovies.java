@@ -8,11 +8,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class listOfMovies extends ArrayAdapter<String> {
+public class listOfMovies extends ArrayAdapter<String[]> {
+
+    private final Context context;
+    private final String[][] movies;
 
 
-    public listOfMovies(Context context, String[] names) {
-        super(context, R.layout.list_of_movies, names);
+
+    public listOfMovies(Context context, String[][] movies) {
+        super(context, R.layout.list_of_movies, movies);
+        this.context = context;
+        this.movies = movies;
     }
 
     @Override
@@ -21,12 +27,14 @@ public class listOfMovies extends ArrayAdapter<String> {
         LayoutInflater josesInflater = LayoutInflater.from(getContext());
         View customView = josesInflater.inflate(R.layout.list_of_movies, parent, false);
 
-        String singleItems = getItem(position);
-        TextView josesText = (TextView) customView.findViewById(R.id.josesTextView);
-        ImageView josesImage = (ImageView) customView.findViewById(R.id.josesImageView);
+        //String singleItems = getItem(position);
+        TextView movieTitle = (TextView) customView.findViewById(R.id.movieTitle);
+        movieTitle.setText(movies[position][0]);
+        TextView josesText = (TextView) customView.findViewById(R.id.movieTitle);
+        //ImageView josesImage = (ImageView) customView.findViewById(R.id.josesImageView);
 
-        josesText.setText(singleItems);
-        josesImage.setImageResource(R.mipmap.luis);
+        //josesText.setText(singleItems);
+        //josesImage.setImageResource(R.mipmap.luis);
 
         return customView;
 

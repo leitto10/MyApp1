@@ -1,25 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/josesImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:adjustViewBounds="false"
-        android:cropToPadding="true"
-        android:scaleType="fitStart"
-        app:srcCompat="@mipmap/luis" />
+
+        android:id="@+id/movieImage"
+        android:layout_width="116dp"
+        android:layout_height="91dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="13dp"
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/josesTextView"
-        android:layout_width="297dp"
-        android:layout_height="match_parent"
+        android:id="@+id/movieTitle"
+        android:layout_width="157dp"
+        android:layout_height="57dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="41dp"
+        android:layout_marginLeft="41dp"
+        android:layout_marginTop="9dp"
+        android:layout_toEndOf="@+id/movieImage"
+        android:layout_toRightOf="@+id/movieImage"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+
+    <TextView
+
+        android:id="@+id/movieYear"
+        android:layout_width="83dp"
+        android:layout_height="31dp"
+        android:layout_below="@+id/movieTitle"
+        android:layout_marginStart="43dp"
+        android:layout_marginLeft="43dp"
+        android:layout_marginTop="17dp"
+        android:layout_toEndOf="@+id/movieImage"
+        android:layout_toRightOf="@+id/movieImage"
         android:layout_weight="1"
         android:text="TextView" />
 
-</LinearLayout>
+</RelativeLayout>
