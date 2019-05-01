@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -45,7 +46,8 @@ public class DisplayMoviesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_movies);
-        
+
+        ImageView imageView = findViewById(R.id.movieImage);
         //String[] names = {"Jose", "Luis", "Yo", "Tu","Jose","Luis","Yo","Me", "tut", "mamaa","nonon","hjkldh"};
 
         ListAdapter myAdapter = new listOfMovies(this, movies);
