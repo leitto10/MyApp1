@@ -1,5 +1,6 @@
 package myapp1.com;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -53,12 +54,20 @@ public class DisplayMoviesActivity extends AppCompatActivity {
         ListAdapter myAdapter = new listOfMovies(this, movies);
         ListView myView = (ListView) findViewById(R.id.listViewMovies);
         myView.setAdapter(myAdapter);
-        myView.setOnItemClickListener(
-                new AdapterView.OnItemClickListener() {
+
+        //Iryna ListViewItemsActivity
+        myView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
                    @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                      String names = String.valueOf(parent.getItemAtPosition(position));
-                        Toast.makeText(DisplayMoviesActivity.this, names, Toast.LENGTH_LONG).show();
+                      Intent intent = new Intent(DisplayMoviesActivity.this, MovieDetailActivity.class);
+
+                       intent.putExtra("ImageURL", movies[position][3]);
+                       intent.putExtra("Title",    movies[position][0]);
+                       intent.putExtra("Year",     movies[position][1]);
+                       intent.putExtra("Director", movies[position][2]);
+                       intent.putExtra("Description", movies[position][4]);
+
+                       startActivity(intent);
                     }
                 }
         );
