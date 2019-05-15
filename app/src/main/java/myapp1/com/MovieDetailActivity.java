@@ -2,6 +2,7 @@ package myapp1.com;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Intent;
@@ -25,13 +26,17 @@ public class MovieDetailActivity extends AppCompatActivity {
         String DirectReceived = bundle.getString("Director");
         String DescReceived = bundle .getString("Description");
 
+
         //creating layout elements
         ImageView image = (ImageView) findViewById(R.id.LargeMovieImage);
         TextView title = (TextView)findViewById(R.id.movieTitle);
         TextView year = (TextView)findViewById(R.id.movieYear);
         TextView director = (TextView)findViewById(R.id.movieDirector);
         TextView description = (TextView)findViewById(R.id.movieDescription);
+        description.setMovementMethod(new ScrollingMovementMethod());
+
         //setting text variables to the fields
+
         title.setText(TitleReceived);
         year.setText(YearReceived);
         director.setText(DirectReceived);
