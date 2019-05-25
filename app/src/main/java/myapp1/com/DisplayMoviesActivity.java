@@ -55,7 +55,7 @@ public class DisplayMoviesActivity extends AppCompatActivity {
         ListView myView = (ListView) findViewById(R.id.listViewMovies);
         myView.setAdapter(myAdapter);
 
-        //Iryna ListViewItemsActivity
+
         myView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
                    @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

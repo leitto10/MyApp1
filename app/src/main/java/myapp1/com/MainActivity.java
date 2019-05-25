@@ -25,8 +25,7 @@ public class MainActivity extends AppCompatActivity {
     /* Toast Method*/
     public void toastMsg(String msg){
         // creating messages for ech button
-        Toast b = Toast.makeText(this, msg, Toast.LENGTH_LONG);
-        b.show();
+
         Toast c = Toast.makeText(this, msg, Toast.LENGTH_LONG);
         c.show();
         Toast d = Toast.makeText(this, msg, Toast.LENGTH_LONG);
@@ -34,9 +33,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /* Method that call buttons messages*/
-    public void displayToastMsgB(View view){
-        toastMsg("Do you want to play a game?");
-    }
     public void displayToastMsgC(View view){
         toastMsg("My first Application");
     }
@@ -57,5 +53,11 @@ public class MainActivity extends AppCompatActivity {
     public void displayMovies(View view) {
         Intent intent = new Intent(this, DisplayMoviesActivity.class);
         startActivity(intent);
+    }
+
+    public void displayCameras(View view){
+        Intent intent = new Intent(this, DisplayCamerasActivity.class);
+        startActivity(intent);
+
     }
 }
