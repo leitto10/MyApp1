@@ -68,8 +68,8 @@
         android:layout_height="54dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:onClick="displayToastMsgC"
-        android:text="Button c"
+        android:onClick="displayMaps"
+        android:text="Maps"
         app:layout_constraintBaseline_toBaselineOf="@+id/button14"
         app:layout_constraintStart_toStartOf="parent" />
 

@@ -70,7 +70,7 @@ public class DisplayCamerasActivity extends AppCompatActivity {
             label.setText(values.get(position).label);
 
             ImageView image = (ImageView) customView.findViewById(R.id.image);
-            String imageUrl = values.get(position).image;
+            String imageUrl = values.get(position).imageUrl;
 
             if(!imageUrl.isEmpty()){
                 Picasso.get().load(imageUrl).into(image);

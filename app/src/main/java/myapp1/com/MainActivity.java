@@ -25,17 +25,11 @@ public class MainActivity extends AppCompatActivity {
     /* Toast Method*/
     public void toastMsg(String msg){
         // creating messages for ech button
-
-        Toast c = Toast.makeText(this, msg, Toast.LENGTH_LONG);
-        c.show();
         Toast d = Toast.makeText(this, msg, Toast.LENGTH_LONG);
         d.show();
     }
 
     /* Method that call buttons messages*/
-    public void displayToastMsgC(View view){
-        toastMsg("My first Application");
-    }
     public void displayToastMsgD(View view){
         toastMsg("Everything goes well so far.");
     }
@@ -60,4 +54,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void displayMaps(View view) {
+        Intent intent = new Intent(this, DisplayMapsActivity.class);
+        startActivity(intent);
+    }
+
+
+
+
+
+
+
 }
