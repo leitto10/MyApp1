@@ -3,4 +3,5 @@
     <string name="button_send">Send</string>
     <string name="edit_message">Enter a Message</string>
     <string name="title_activity_display_maps">Map</string>
+    <string name="title_activity_display_map">Map</string>
 </resources>

@@ -34,7 +34,7 @@
 
         <activity
             android:name=".DisplayMapsActivity"
-            android:label="@string/title_activity_display_maps"
+            android:label="Google Maps"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DisplayCamerasActivity"

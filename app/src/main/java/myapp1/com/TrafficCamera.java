@@ -16,7 +16,6 @@ class TrafficCamera {
 
     }
 
-
     public String imageUrl() {
         return this.imageUrl;
     }
