@@ -23,6 +23,7 @@ public class NoNetworkConnection extends AppCompatActivity {
         setContentView(R.layout.no_network_connection);
 
         Log.i(TAG, "started onCreate");
+        //adding toolbar
 
     }
 }

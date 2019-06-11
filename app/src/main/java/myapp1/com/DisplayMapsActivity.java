@@ -135,11 +135,11 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
                             Log.i("Camera data", c.toString());
 
                         }
+                        showCameraMarkers();
 
                     } catch (JSONException e) {
                         Log.d("CAMERAS error", e.getMessage());
                     }
-                    showCameraMarkers();
                 }
             }, new Response.ErrorListener() {
 
