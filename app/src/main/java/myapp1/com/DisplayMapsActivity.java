@@ -142,6 +142,7 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
                     }
                 }
             }, new Response.ErrorListener() {
+                
 
                 @Override
                 public void onErrorResponse(VolleyError error) {
