@@ -24,6 +24,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -47,20 +49,22 @@ import static android.Manifest.permission.ACCESS_COARSE_LOCATION;
 
 public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
+    private static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 9;
     private GoogleMap mMap;
-    Location currentLocation;
     private FusedLocationProviderClient fusedLocationClient;
     private static final int LOCATION_REQUEST_CODE = 1234;
     private static final String[] permission = {ACCESS_COARSE_LOCATION};
     private boolean locationPermissionGranted;
 
     private DisplayCamerasActivity camerasActivity;
-
+    private Location mLastLocation;
     private static boolean WIFIconnected = false;
     private static boolean mobileConnected = false;
 
     //list of cameras
     List<TrafficCamera> cameraData = new ArrayList<>();
+    private boolean mAddressRequested;
+    private LocationCallback mLocationCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +75,13 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        createLocationCallback();
+        loadCameraData();
+        getLocation();
         getLocationPermission();
+        getDeviceLocation();
+
     }
 
     public void getDeviceLocation() {
@@ -89,7 +99,8 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
                                 if (location != null) {
                                     mMap.setMyLocationEnabled(true);
 
-                                    LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                                    LatLng myLocation = new LatLng(location.getLatitude(),
+                                            location.getLongitude());
 
                                     //mMap.setMinZoomPreference(10); // zoom to city level
                                     mMap.addMarker(new MarkerOptions().position(myLocation)
@@ -97,7 +108,6 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
                                     mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
                                     mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 11.2f));
 
-                                    //showCameraMarkers();
                                 }
                             }
                         }
@@ -109,49 +119,131 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
         }
     }
 
+    private void getLocationPermission() {
+
+        if (ActivityCompat.checkSelfPermission(this.getApplicationContext(), ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+            locationPermissionGranted = true;
+        } else {
+            ActivityCompat.requestPermissions(this, permission, LOCATION_REQUEST_CODE);
+        }
+    }
+
+    private void createLocationCallback() {
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                Log.d("LOCATION","onLocationResult");
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    mLastLocation = location;
+                    updateUI();
+                }
+            };
+        };
+    }
+
+    public void getLocation() {
+        Log.d("LOCATION","getLocation");
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                ==PackageManager.PERMISSION_GRANTED){
+            Log.d("LOCATION","permissionGranted");
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            Log.d("LOCATION","gotLocation");
+
+                            // Got last known location. In some rare situations this can be null.
+                            if(location != null) {
+                                // Logic to handle location object
+                                mLastLocation = location;
+                                updateUI();
+                            }
+                        }
+                    });
+        } else {
+            Log.d("LOCATION","permissionNotGranted");
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+                // No explanation needed, we can request the permission.
+                Log.d("LOCATION","requestPermission");
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+            }
+        }
+    }
+
+    public void updateUI() {
+        if (mLastLocation == null) {
+            // get location updates
+            Log.d("LOCATION", "startLocationUpdates");
+            getDeviceLocation();
+        } else {
+
+            // initiate geocode request
+            if (mAddressRequested) {
+                getDeviceLocation();
+            }
+            //mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
+            //mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));
+            LatLng myLocation = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            mMap.setMinZoomPreference(10); // zoom to city level
+            mMap.addMarker(new MarkerOptions().position(myLocation)
+                    .title("My current location"));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+        }
+    }
+
     public void loadCameraData() {
 
         String dataUrl = "http://brisksoft.us/ad340/traffic_cameras_merged.json";
 
-            RequestQueue queue = Volley.newRequestQueue(this);
-            JsonArrayRequest jsonReq = new JsonArrayRequest(Request.Method.GET, dataUrl, null, new Response.Listener<JSONArray>() {
+        RequestQueue queue = Volley.newRequestQueue(this);
+        JsonArrayRequest jsonReq = new JsonArrayRequest(Request.Method.GET, dataUrl, null, new Response.Listener<JSONArray>() {
 
-                @Override
-                public void onResponse(JSONArray response) {
-                    Log.d("Cameras 1", response.toString());
-                    try {
-                        for (int i = 0; i < response.length(); i++) {
-                            JSONObject camera = response.getJSONObject(i);
+            @Override
+            public void onResponse(JSONArray response) {
+                Log.d("Cameras 1", response.toString());
+                try {
+                    for (int i = 0; i < response.length(); i++) {
+                        JSONObject camera = response.getJSONObject(i);
 
-                            double[] coords = {camera.getDouble("ypos"), camera.getDouble("xpos")};
+                        double[] coords = {camera.getDouble("ypos"), camera.getDouble("xpos")};
 
-                            TrafficCamera c = new TrafficCamera(
-                                    camera.getString("cameralabel"),
-                                    camera.getJSONObject("imageurl").getString("url"),
-                                    camera.getString("ownershipcd"),
-                                    coords
-                            );
-                            cameraData.add(c);
-                            Log.i("Camera data", c.toString());
+                        TrafficCamera c = new TrafficCamera(
+                                camera.getString("cameralabel"),
+                                camera.getJSONObject("imageurl").getString("url"),
+                                camera.getString("ownershipcd"),
+                                coords
+                        );
+                        cameraData.add(c);
+                        Log.i("Camera data", c.toString());
 
-                        }
-                        showCameraMarkers();
-
-                    } catch (JSONException e) {
-                        Log.d("CAMERAS error", e.getMessage());
                     }
+                    showCameraMarkers();
+
+                } catch (JSONException e) {
+                    Log.d("CAMERAS error", e.getMessage());
                 }
-            }, new Response.ErrorListener() {
-                
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // TODO: Handle error
-
-                }
-            });
-            queue.add(jsonReq);
-
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // TODO: Handle error
+            }
+        });
+        queue.add(jsonReq);
     }
 
     public boolean checkNetworkConnections() {
@@ -159,9 +251,6 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnected()) {
-
-            //different types of connection
-
             WIFIconnected = networkInfo.getType() == connectivityManager.TYPE_WIFI;
             mobileConnected = networkInfo.getType() == connectivityManager.TYPE_MOBILE;
             if (WIFIconnected) {
@@ -191,16 +280,6 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
         }
     }
 
-    private void getLocationPermission() {
-
-        if (ActivityCompat.checkSelfPermission(this.getApplicationContext(), ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-
-            locationPermissionGranted = true;
-        } else {
-            ActivityCompat.requestPermissions(this, permission, LOCATION_REQUEST_CODE);
-        }
-    }
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -213,31 +292,12 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        Log.d("Location", "On MapReady");
 
         // Add a marker in Sydney and move the camera
         //LatLng sydney = new LatLng(-34, 151);
         //mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        if (locationPermissionGranted) {
-            getDeviceLocation();
-            loadCameraData();
-            showCameraMarkers();
-            //getLocationPermission();
-
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //public void onRequestPermissionsResult(int requestCode, permission, int[] grantResults){
-                //locationPermissionGranted = true;
-                ActivityCompat.requestPermissions(this, permission, LOCATION_REQUEST_CODE);
-            }
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-        mMap.setMyLocationEnabled(true);
     }
 }
