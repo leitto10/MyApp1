@@ -6,15 +6,7 @@
     </shared>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53afb8fa-8190-40f5-835e-7c661dcdae80" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.10.1/taskHistory/taskHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/myapp1/com/DisplayMapsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/myapp1/com/DisplayMapsActivity.java" afterDir="false" />
-    </list>
+    <list default="true" id="53afb8fa-8190-40f5-835e-7c661dcdae80" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,14 +62,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="java" value="163" />
-          <entry key="txt" value="32" />
+          <entry key="txt" value="66" />
           <entry key="xml" value="47" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JAVA" value="163" />
-          <entry key="PLAIN_TEXT" value="32" />
+          <entry key="PLAIN_TEXT" value="66" />
           <entry key="XML" value="47" />
         </counts>
       </usages-collector>
@@ -361,7 +353,14 @@
       <option name="project" value="LOCAL" />
       <updated>1560294527237</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="adding permissions">
+      <created>1560323680538</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1560323680538</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -408,7 +407,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="map with location and cameras" />
-    <option name="LAST_COMMIT_MESSAGE" value="map with location and cameras" />
+    <MESSAGE value="adding permissions" />
+    <option name="LAST_COMMIT_MESSAGE" value="adding permissions" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/build.gradle">
