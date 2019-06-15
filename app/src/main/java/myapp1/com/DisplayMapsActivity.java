@@ -82,6 +82,7 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
         getLocationPermission();
         getDeviceLocation();
 
+
     }
 
     public void getDeviceLocation() {
@@ -193,7 +194,7 @@ public class DisplayMapsActivity extends FragmentActivity implements OnMapReadyC
 
             // initiate geocode request
             if (mAddressRequested) {
-                getDeviceLocation();
+                getLocation();
             }
             //mLatitudeText.setText(String.valueOf(mLastLocation.getLatitude()));
             //mLongitudeText.setText(String.valueOf(mLastLocation.getLongitude()));

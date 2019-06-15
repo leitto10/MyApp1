@@ -16,7 +16,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:ems="10"
-        android:hint="@string/edit_message"
+        android:hint="User Name: "
         android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,7 +30,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:onClick="sendMessage"
-        android:text="@string/button_send"
+        android:text="LogIn"
         app:layout_constraintBaseline_toBaselineOf="@+id/editText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/editText" />
@@ -52,13 +52,13 @@
         android:layout_height="54dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="256dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
         android:onClick="displayCameras"
         android:text="Cameras"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.813"
+        app:layout_constraintHorizontal_bias="0.82"
         app:layout_constraintStart_toEndOf="@+id/button10"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -88,5 +88,29 @@
         app:layout_constraintHorizontal_bias="0.82"
         app:layout_constraintStart_toEndOf="@+id/button13"
         app:layout_constraintTop_toBottomOf="@+id/button11" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="202dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="202dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2" />
 
 </android.support.constraint.ConstraintLayout>
